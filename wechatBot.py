@@ -103,8 +103,8 @@ def text_reply(msg):
 
 def main():
     # 微信机器人启动
-    itchat.auto_login(True)
-    # itchat.auto_login(True, enableCmdQR=2)
+    # itchat.auto_login(True)
+    itchat.auto_login(True, enableCmdQR=2)
     itchat.run()
 
 if __name__ == '__main__':
