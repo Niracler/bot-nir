@@ -18,6 +18,8 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from informatiom import info
 
 # Enable logging
+from tuling import get_response
+
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 
@@ -33,13 +35,18 @@ def start(bot, update):
 
 def help(bot, update):
     """Send a message when the command /help is issued."""
-    update.message.reply_text(u'Bot:'+info.help)
+    update.message.reply_text(u'Bot:' + info.help)
 
 
 def echo(bot, update):
+    if info.tulingBot == True:
+        update.message.reply_text(('M醬:' + get_response(update.message.text)) or u'bot：M醬不在')
+        return
+
     """自定义回复内容"""
     if update.message.text in info.items.keys():
-        update.message.reply_text(info.items[update.message.text])
+        update.message.reply_text(u'Bot:' + info.items[update.message.text])
+
 
 def test(bot, update):
     """调试模式"""
@@ -53,10 +60,27 @@ def error(bot, update, error):
     logger.warning('Update "%s" caused error "%s"', update, error)
 
 
+def tuling(bot, update):
+    """图灵机的启动"""
+    update.message.reply_text(u'Bot:M醬,出来吧')
+    info.tulingBot = True
+
+
+def killTuling(bot, update):
+    """图灵机的关闭"""
+    update.message.reply_text(u'Bot:M醬,可以走了')
+    info.tulingBot = False
+
+
+def phone(bot, update):
+    update.message.reply_text(u'Bot:' + info.items['phone'])
+
+
 def main():
     """Start the bot."""
     try:
-        with open('telegramBot.json') as f: key = json.loads(f.read())['key']
+        with open('telegramBot.json') as f:
+            key = json.loads(f.read())['key']
     except:
         key = ''
 
@@ -70,6 +94,9 @@ def main():
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("test", test))
+    dp.add_handler(CommandHandler("tuling", tuling))
+    dp.add_handler(CommandHandler("killTuling", killTuling))
+    dp.add_handler(CommandHandler("phone", phone))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
