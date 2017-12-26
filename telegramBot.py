@@ -39,7 +39,7 @@ def help(bot, update):
 
 
 def echo(bot, update):
-    if info.tulingBot == True:
+    if info.tulingBot_Telegram == True:
         update.message.reply_text(('M醬:' + get_response(update.message.text)) or u'bot：M醬不在')
         return
 
@@ -63,13 +63,13 @@ def error(bot, update, error):
 def tuling(bot, update):
     """图灵机的启动"""
     update.message.reply_text(u'Bot:M醬,出来吧')
-    info.tulingBot = True
+    info.tulingBot_Telegram = True
 
 
 def killTuling(bot, update):
     """图灵机的关闭"""
     update.message.reply_text(u'Bot:M醬,可以走了')
-    info.tulingBot = False
+    info.tulingBot_Telegram = False
 
 
 def phone(bot, update):

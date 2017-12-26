@@ -14,6 +14,7 @@ class Information():
         self.statusFlag = True
         self.tulingBot = False
         self.tulingBot_Group = False
+        self.tulingBot_Telegram = False
         self.time = '1000'
         self.help = '关于各种命令\n' \
                     + '/help: 该帮助文档\n' \
