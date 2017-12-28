@@ -17,7 +17,7 @@ def myWait(func):
 @itchat.msg_register('Text')
 def text_reply(msg):
     # help，以及code
-    if u'/help' == msg['Text']:
+    if u'/help' == msg['Text'] or u'help' == msg['Text']:
         msg.user.send(u'Bot:' + info.help)
         return
 
@@ -111,4 +111,4 @@ if __name__ == '__main__':
     main()
 
 wechat_bot = threading.Thread(target=main)
-wechat_bot.setDaemon(True)
+# wechat_bot.setDaemon(True)# 将其设置为后台进程

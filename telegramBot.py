@@ -117,4 +117,4 @@ if __name__ == '__main__':
     main()
 
 telegram_bot = threading.Thread(target=main)
-telegram_bot.setDaemon(True)
+# telegram_bot.setDaemon(True) # 将其设置为后台进程

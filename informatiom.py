@@ -42,5 +42,5 @@ def wait():
 
 
 t = threading.Thread(target=wait)  # 多线程计算时间五分钟
-t.setDaemon(True)
+t.setDaemon(True)  # 后台进程,定时操作
 t.start()

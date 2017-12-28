@@ -5,6 +5,3 @@ from wechatBot import wechat_bot
 
 telegram_bot.start()
 wechat_bot.start()
-
-while (True):
-    sleep(1000)
