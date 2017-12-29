@@ -1,21 +1,17 @@
 # coding=utf8
+import time
 import threading
-from time import sleep
 from tuling import get_response  # 图灵机器人,https://github.com/Niracler/myChat/blob/master/tuling.py
 import itchat
 from itchat.content import *
 from informatiom import info  # 关于信息的类,https://github.com/Niracler/myChat/blob/master/informatiom.py
 
-
-# 关于等待的线程,并且定时存档
-def myWait(func):
-    sleep(int(info.time))
-    info.statusFlag = True
-
-
 # 当接到文字消息的时候的动作
 @itchat.msg_register('Text')
-def text_reply(msg):
+def text_reply(msg, time):
+    # 记录最后通话时间
+    info.last_time = time.time()
+
     # help，以及code
     if u'/help' == msg['Text'] or u'help' == msg['Text']:
         msg.user.send(u'Bot:' + info.help)
@@ -59,11 +55,7 @@ def text_reply(msg):
         msg.user.send('Bot:' + info.time)
 
     # 状态中,向对方表示自己的状态
-    if info.statusFlag == True:
-        info.statusFlag = False  # 进来后马上阻止
-        t = threading.Thread(target=myWait, args=(u'等待',))  # 多线程计算时间五分钟
-        t.setDaemon(True)
-        t.start()
+    if (info.last_time - time.time() > info.time):
         return ('Bot:' + info.status)
 
 

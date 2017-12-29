@@ -1,12 +1,12 @@
 # coding=utf8
 import json
 import threading
-from time import sleep
+from time import sleep, time
 
 
 class Information():
     # 构造函数,关于基本配置,文件读档
-    def __init__(self):
+    def __init__(self, last_time):
         # 数据成员
         self.items = {}  # 一个自定义规则的字典
         self.status = '本人离线中，可能要等一段时间再能回复\n' \
@@ -15,6 +15,7 @@ class Information():
         self.tulingBot = False
         self.tulingBot_Group = False
         self.tulingBot_Telegram = False
+        self.last_time = last_time
         self.time = '1000'
         self.help = '关于各种命令\n' \
                     + '/help: 该帮助文档\n' \
@@ -32,7 +33,7 @@ class Information():
             self.items = {}
 
 
-info = Information()
+info = Information(time())
 
 
 def wait():
