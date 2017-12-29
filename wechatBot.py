@@ -6,9 +6,15 @@ import itchat
 from itchat.content import *
 from informatiom import info  # 关于信息的类,https://github.com/Niracler/myChat/blob/master/informatiom.py
 
+
 # 当接到文字消息的时候的动作
 @itchat.msg_register('Text')
-def text_reply(msg, time):
+def text_reply(msg):
+    # 状态中,向对方表示自己的状态
+    if ((time.time() - info.last_time) > int(info.time)):
+        info.last_time = time.time()
+        return 'Bot:' + info.status
+
     # 记录最后通话时间
     info.last_time = time.time()
 
@@ -44,7 +50,7 @@ def text_reply(msg, time):
 
     # 时间模式,只对自己有用
     if u'/time' in msg['Text'] and msg['ToUserName'] == 'filehelper':
-        time, info.time = map(str, msg['Text'].split())
+        time0, info.time = map(str, msg['Text'].split())
         msg.user.send(u'Bot:成功设定时间')
         msg.user.send(u'Bot:' + info.time)
 
@@ -53,10 +59,6 @@ def text_reply(msg, time):
         test, info.status = map(str, msg['Text'].split())
         msg.user.send('Bot:成功设定状态')
         msg.user.send('Bot:' + info.time)
-
-    # 状态中,向对方表示自己的状态
-    if (info.last_time - time.time() > info.time):
-        return ('Bot:' + info.status)
 
 
 # 对于文件之类的操作
@@ -98,6 +100,7 @@ def main():
     # itchat.auto_login(True)
     itchat.auto_login(True, enableCmdQR=2)
     itchat.run()
+
 
 if __name__ == '__main__':
     main()
