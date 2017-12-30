@@ -10,14 +10,6 @@ from informatiom import info  # 关于信息的类,https://github.com/Niracler/m
 # 当接到文字消息的时候的动作
 @itchat.msg_register('Text')
 def text_reply(msg):
-    # 状态中,向对方表示自己的状态
-    if ((time.time() - info.last_time) > int(info.time)):
-        info.last_time = time.time()
-        return 'Bot:' + info.status
-
-    # 记录最后通话时间
-    info.last_time = time.time()
-
     # help，以及code
     if u'/help' == msg['Text'] or u'help' == msg['Text']:
         msg.user.send(u'Bot:' + info.help)
@@ -59,6 +51,14 @@ def text_reply(msg):
         test, info.status = map(str, msg['Text'].split())
         msg.user.send('Bot:成功设定状态')
         msg.user.send('Bot:' + info.time)
+
+    # 状态中,向对方表示自己的状态
+    if ((time.time() - info.last_time) > int(info.time)):
+        info.last_time = time.time()
+        return 'Bot:' + info.status
+
+        # 记录最后通话时间
+    info.last_time = time.time()
 
 
 # 对于文件之类的操作
