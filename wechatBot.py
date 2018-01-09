@@ -61,14 +61,14 @@ def text_reply(msg):
     info.last_time = time.time()
 
 
-# 对于文件之类的操作
-@itchat.msg_register([PICTURE, RECORDING, ATTACHMENT, VIDEO])
-def download_files(msg):
-    msg.download(msg.fileName)
-    typeSymbol = {
-        PICTURE: 'img',
-        VIDEO: 'vid', }.get(msg.type, 'fil')
-    return ('@%s@%s' % (typeSymbol, msg.fileName))
+# # 对于文件之类的操作
+# @itchat.msg_register([PICTURE, RECORDING, ATTACHMENT, VIDEO])
+# def download_files(msg):
+#     msg.download(msg.fileName)
+#     typeSymbol = {
+#         PICTURE: 'img',
+#         VIDEO: 'vid', }.get(msg.type, 'fil')
+#     return ('@%s@%s' % (typeSymbol, msg.fileName))
 
 
 # 添加朋友时的动作
