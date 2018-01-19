@@ -9,8 +9,7 @@ class Information():
     def __init__(self, last_time):
         # 数据成员
         self.items = {}  # 一个自定义规则的字典
-        self.status = '本人离线中，可能要等一段时间再能回复\n' \
-                      + '有事情，请回复help'
+        self.status = '本人离线中，可能要等一段时间再能回复\n'
         self.statusFlag = True
         self.tulingBot = False
         self.tulingBot_Group = False
