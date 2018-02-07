@@ -1,5 +1,3 @@
-from time import sleep
-
 from telegramBot import telegram_bot
 from wechatBot import wechat_bot
 

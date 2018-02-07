@@ -17,11 +17,11 @@ def text_reply(msg):
 
     # 关于图灵机的启动与关闭
     if u'/tuling' == msg['Text']:
-        msg.user.send(u'Bot:M醬,出来吧')
+        msg.user.send(u'M醬:你好,我是M醬')
         info.tulingBot = True
         return
     elif u'/killTuling' == msg['Text']:
-        msg.user.send(u'Bot:M醬,可以走了')
+        msg.user.send(u'M醬:我这就走')
         info.tulingBot = False
         return
     elif info.tulingBot == True:
