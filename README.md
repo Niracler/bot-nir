@@ -40,7 +40,11 @@ $cd nirBot/
 $proxychains4 python3 main.py
 ```
 
-下面是关于虚拟环境的用法
+## 下面是关于虚拟环境的用法
+下载虚拟环境
+```
+pip3 install virtualenv
+```
 
 启动虚拟环境
 ```
@@ -49,6 +53,6 @@ $ source venv/bin/activate　
 
 安装python包
 ```
-$ pip install -r requirements.txt
+$ pip3 install -r requirements.txt
 ```
 
