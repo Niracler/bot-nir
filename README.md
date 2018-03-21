@@ -39,3 +39,16 @@ $sudo make install-config (installs proxychains.conf)
 $cd nirBot/
 $proxychains4 python3 main.py
 ```
+
+下面是关于虚拟环境的用法
+
+启动虚拟环境
+```
+$ source venv/bin/activate　
+```
+
+安装python包
+```
+$ pip install -r requirements.txt
+```
+
