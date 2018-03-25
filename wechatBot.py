@@ -57,8 +57,33 @@ def text_reply(msg):
         info.last_time = time.time()
         return 'Bot:' + info.status
 
-        # 记录最后通话时间
+    # 记录最后通话时间
     info.last_time = time.time()
+
+    # 对作业的操作
+    if '/add' in msg['Text']:
+        course_name = msg['Text'].split()[1]
+
+        homework = ''
+        for row in msg['Text'].split('\n')[1:]:
+            homework = homework + '\n' + row
+
+        info.homework[course_name] = homework
+        msg.user.send(course_name + homework)
+
+    if '/del' in msg['Text']:
+        info.homework.pop(str(msg['Text'].split()[1]))
+
+    if '/homework' == msg['Text']:
+        homework = ""
+        cow = ""
+        for cow in info.homework:
+            homework = homework + cow
+            homework = homework + info.homework[cow]
+            homework += "\n\n"
+
+        msg.user.send(homework)
+
 
 
 # # 对于文件之类的操作

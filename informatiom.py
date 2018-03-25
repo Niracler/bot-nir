@@ -23,6 +23,7 @@ class Information():
                     + '/tuling:呼叫图灵机器人 \n' \
                     + '/killTuling:赶走图灵机器人\n\n' \
                     + '项目主页：github.com/Niracler/nirBot\n'
+        self.homework = {}  # 存储作业信息
 
         # 从文件中，读取自定义规则
         try:
@@ -30,6 +31,13 @@ class Information():
                 self.items = json.load(f)
         except:
             self.items = {}
+
+        # 从文件中，读取自定义规则
+        try:
+            with open('homework.json') as f:
+                self.homework = json.load(f)
+        except:
+            self.homework = {}
 
 
 info = Information(time())
@@ -39,6 +47,10 @@ def wait():
     while (True):
         sleep(int(info.time))
         with open('keyWord.json', 'w') as f: f.write(json.dumps(info.items))
+
+    while (True):
+        sleep(int(info.time))
+        with open('homework.json', 'w') as f: f.write(json.dumps(info.homework))
 
 
 t = threading.Thread(target=wait)  # 多线程计算时间五分钟
