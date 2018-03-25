@@ -20,15 +20,13 @@ def get_nir_response(message):
 
     # 自定义回复内容
     if message in info.items.keys():
-        msg.user.send('Bot:' + info.items[msg['Text']])
-        return
+        return ('Bot:' + info.items[message])
 
     # 调试模式
-    if u'/test' in msg['Text']:
-        test, from_str, to_str = map(str, msg['Text'].split())
+    if u'/test' in message:
+        test, from_str, to_str = map(str, message.split())
         info.items[from_str] = to_str  # 这已经是互异的了
-        msg.user.send(u'Bot:指令录入成功')
-        return
+        return (u'Bot:指令录入成功')
 
     # 时间模式,只对自己有用
     if u'/time' in message:
