@@ -1,13 +1,15 @@
 # coding=utf8
+import argparse
 import time
 import threading
 
 from nirBot import get_nir_response
 from tuling import get_response  # 图灵机器人,https://github.com/Niracler/myChat/blob/master/tuling.py
+from informatiom import info  # 关于信息的类,https://github.com/Niracler/myChat/blob/master/informatiom.py
 import itchat
 from itchat.content import *
-from informatiom import info  # 关于信息的类,https://github.com/Niracler/myChat/blob/master/informatiom.py
 
+isPC = True
 
 # 当接到文字消息的时候的动作
 @itchat.msg_register('Text')
@@ -60,12 +62,18 @@ def text_reply(msg):
 
 def main():
     # 微信机器人启动
-    itchat.auto_login(True)
-    # itchat.auto_login(True, enableCmdQR=2)
+    if isPC == 1:
+        itchat.auto_login(True)
+    elif isPC == 2:
+        itchat.auto_login(True, enableCmdQR=2)
     itchat.run()
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description="Hello nirBot")
+    parser.add_argument('-i', '--isPC', default=1, type=int)
+    isPC = parser.parse_args().isPC
+
     main()
 
 wechat_bot = threading.Thread(target=main)
