@@ -38,13 +38,7 @@ def get_nir_response(message):
         test, info.status = map(str, message.split())
         return ('Bot:成功设定状态 ' + info.time)
 
-    # 状态中,向对方表示自己的状态
-    if ((time.time() - info.last_time) > int(info.time)):
-        info.last_time = time.time()
-        return 'Bot:' + info.status
 
-    # 记录最后通话时间
-    info.last_time = time.time()
 
     # 对作业的操作
     if '/add' in message:

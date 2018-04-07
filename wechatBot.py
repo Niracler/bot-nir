@@ -12,10 +12,19 @@ from informatiom import info  # 关于信息的类,https://github.com/Niracler/m
 # 当接到文字消息的时候的动作
 @itchat.msg_register('Text')
 def text_reply(msg):
-    msg.user.send(get_nir_response(msg["Text"]))
+    if get_nir_response(msg["Text"]) is not None:
+        msg.user.send(get_nir_response(msg["Text"]))
+
+    # 状态中,向对方表示自己的状态
+    elif ((time.time() - info.last_time) > int(info.time)):
+        info.last_time = time.time()
+        return ('Bot:' + info.status)
+
+    # 记录最后通话时间
+    info.last_time = time.time()
 
 
-# # 对于文件之类的操作
+# 对于文件之类的操作
 # @itchat.msg_register([PICTURE, RECORDING, ATTACHMENT, VIDEO])
 # def download_files(msg):
 #     msg.download(msg.fileName)
@@ -51,8 +60,8 @@ def text_reply(msg):
 
 def main():
     # 微信机器人启动
-    # itchat.auto_login(True)
-    itchat.auto_login(True, enableCmdQR=2)
+    itchat.auto_login(True)
+    # itchat.auto_login(True, enableCmdQR=2)
     itchat.run()
 
 

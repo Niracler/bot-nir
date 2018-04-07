@@ -32,7 +32,7 @@ class Information():
         except:
             self.items = {}
 
-        # 从文件中，读取自定义规则
+        # 从文件中，读取读取作业
         try:
             with open('homework.json') as f:
                 self.homework = json.load(f)
@@ -45,11 +45,8 @@ info = Information(time())
 
 def wait():
     while (True):
-        sleep(int(info.time))
+        sleep(5)
         with open('keyWord.json', 'w') as f: f.write(json.dumps(info.items))
-
-    while (True):
-        sleep(int(info.time))
         with open('homework.json', 'w') as f: f.write(json.dumps(info.homework))
 
 
